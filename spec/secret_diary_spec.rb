@@ -16,9 +16,16 @@ describe 'SecretDiary' do
       expect(@secret_diary).to respond_to(:add_entry).with(1).argument
     end
 
-    it 'raises error if try to add content to locked diary' do
+    it 'raises error when adding entry to a locked diary' do
       expect { @secret_diary.add_entry("Hello") }.to \
-      raise_error("Cannot add content to a locked diary")
+      raise_error("Cannot add entry to a locked diary")
+    end
+  end
+
+  describe '#get_entries' do
+    it 'raises error when getting entries from a locked diary' do
+      expect { @secret_diary.get_entries }.to \
+      raise_error("Cannot get entries from a locked diary")
     end
   end
 end
