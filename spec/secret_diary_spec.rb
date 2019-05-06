@@ -28,4 +28,12 @@ describe 'SecretDiary' do
       raise_error("Cannot get entries from a locked diary")
     end
   end
+
+  describe '#unlock' do
+    it 'unlocks a locked diary' do
+      @secret_diary.unlock
+
+      expect(@secret_diary.locked).to eq(false)
+    end
+  end
 end

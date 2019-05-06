@@ -13,4 +13,8 @@ class SecretDiary
   def get_entries
     raise "Cannot get entries from a locked diary" if @locked
   end
+
+  def unlock
+    @locked = false
+  end
 end
