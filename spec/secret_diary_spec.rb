@@ -28,6 +28,17 @@ describe 'SecretDiary' do
 
       expect(@secret_diary.get_entries).to eq([entry])
     end
+
+    it 'raises error when adding entry to a relocked diary' do
+      @secret_diary.unlock
+
+      expect(@secret_diary.locked).to eq(false)
+
+      @secret_diary.lock
+
+      expect { @secret_diary.add_entry("Hello") }.to \
+      raise_error("Cannot add entry to a locked diary")
+    end
   end
 
   describe '#get_entries' do
@@ -45,6 +56,17 @@ describe 'SecretDiary' do
 
       expect(@secret_diary.get_entries).to eq([entry_1, entry_2])
     end
+
+    it 'raises error when getting entries from a relocked diary' do
+      @secret_diary.unlock
+
+      expect(@secret_diary.locked).to eq(false)
+
+      @secret_diary.lock
+
+      expect { @secret_diary.get_entries }.to \
+      raise_error("Cannot get entries from a locked diary")
+    end
   end
 
   describe '#unlock' do
@@ -58,7 +80,7 @@ describe 'SecretDiary' do
   describe '#lock' do
     it 'locks an unlocked diary' do
       @secret_diary.unlock
-      
+
       expect(@secret_diary.locked).to eq(false)
 
       @secret_diary.lock
