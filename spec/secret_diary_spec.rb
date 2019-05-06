@@ -54,4 +54,16 @@ describe 'SecretDiary' do
       expect(@secret_diary.locked).to eq(false)
     end
   end
+
+  describe '#lock' do
+    it 'locks an unlocked diary' do
+      @secret_diary.unlock
+      
+      expect(@secret_diary.locked).to eq(false)
+
+      @secret_diary.lock
+
+      expect(@secret_diary.locked).to eq(true)
+    end
+  end
 end
